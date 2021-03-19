@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import s from "./Header.module.scss";
-
+import icon_cross from "./img/cross.svg";
 import LoginButtons from "../LogInButtons/index.js";
 
 class Header extends React.PureComponent {
@@ -33,22 +33,28 @@ class Header extends React.PureComponent {
         <Link to="/home">
           <p className={s.text}>Travel-APP</p>
         </Link>
+        <div className={s.buttons}>
         {location.pathname.substring(0, 5) === "/home" ? (
+          <div className={s.input_container}>
           <input
             className={s.input}
             onChange={func.search}
             type="text"
             placeholder={
               language === "ru"
-                ? "Осуществи мечту! Начни с поиска!"
+                ? "найти страну"
                 : language === "en"
-                ? "Make your dream come true! Start by searching!"
-                : "Réalise tes rêves! Commencez par chercher!"
+                ? "find a country"
+                : "trouver un pays"
             }
             ref={(inputRef) => (this.inputRef = inputRef)}
           />
+          <button className={s.input_button}>
+            <img src={icon_cross}/>
+          </button>
+          </div>
         ) : null}
-        <div className={s.buttons}>
+  
           <LoginButtons language={language}/>
           <select className={s.select} onChange={switchLanguage} value={language}>
             {this.languages.map((item, index) => (
